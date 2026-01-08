@@ -1,0 +1,21 @@
+from itertools import groupby
+
+def compress_string():
+    # Read the input string
+    S = input().strip()
+    
+    # groupby(S) will group consecutive identical characters
+    # Example: '12223' -> key: 1, group: [1]; key: 2, group: [2, 2, 2]; key: 3, group: [3]
+    groups = []
+    
+    for key, group in groupby(S):
+        # count the number of items in the group
+        count = len(list(group))
+        # format as (count, key) - key must be an int for the sample output format
+        groups.append(f"({count}, {key})")
+    
+    # Join the formatted strings with a single space
+    print(" ".join(groups))
+
+if __name__ == '__main__':
+    compress_string()
