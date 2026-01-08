@@ -1,0 +1,26 @@
+class Solution:
+    def combinationSum(self, candidates: list[int], target: int) -> list[list[int]]:
+        results = []
+
+        def backtrack(remain, curr_comb, start):
+            # Base Case 1: We found a valid combination
+            if remain == 0:
+                results.append(list(curr_comb))
+                return
+            
+            # Base Case 2: We exceeded the target
+            if remain < 0:
+                return
+
+            for i in range(start, len(candidates)):
+                # Decision: Add the number at index 'i'
+                curr_comb.append(candidates[i])
+                
+                # Recursion: Give the same index 'i' because we can reuse the number
+                backtrack(remain - candidates[i], curr_comb, i)
+                
+                # Backtrack: Remove the number to try the next candidate
+                curr_comb.pop()
+
+        backtrack(target, [], 0)
+        return results
